@@ -1,0 +1,49 @@
+# Render Blueprint: descrie tot ce trebuie creat pe Render dintr-un singur fisier.
+# Render il citeste automat cand alegi "New > Blueprint" si selectezi repository-ul.
+
+databases:
+  - name: rezervo-db
+    plan: free            # Atentie: baza de date gratuita expira dupa 30 de zile
+    databaseName: rezervo
+    user: rezervo
+
+services:
+  # ---------- Backend (Java / Spring Boot), construit din backend/Dockerfile ----------
+  - type: web
+    name: rezervo-api
+    runtime: docker
+    plan: free
+    rootDir: backend
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        generateValue: true          # Render genereaza o cheie secreta aleatorie
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false                  # Il completezi tu: adresa site-ului (ex: https://rezervo-web.onrender.com)
+      - key: DB_HOST
+        fromDatabase: { name: rezervo-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: rezervo-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: rezervo-db, property: database }
+      - key: DB_USER
+        fromDatabase: { name: rezervo-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: rezervo-db, property: password }
+
+  # ---------- Site-ul web (React), servit ca fisiere statice ----------
+  - type: web
+    name: rezervo-web
+    runtime: static
+    rootDir: web
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false                  # Il completezi tu: adresa API-ului (ex: https://rezervo-api.onrender.com)

@@ -1,0 +1,22 @@
+# Dependinte si fisiere generate (se recreeaza automat)
+node_modules/
+dist/
+target/
+.expo/
+web-build/
+backend/data/
+
+# Fisiere cu secrete / setari locale — NU se pun niciodata in Git
+.env
+.env.*
+!.env.example
+*.pem
+*.jks
+*.keystore
+
+# Editor / sistem
+.idea/
+.vscode/
+*.iml
+.DS_Store
+*.log
