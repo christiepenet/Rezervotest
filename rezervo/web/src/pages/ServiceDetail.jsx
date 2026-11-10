@@ -49,7 +49,7 @@ export default function ServiceDetail() {
 
   return (
     <div className="detail">
-      <Link to="/" className="back">← Înapoi la servicii</Link>
+      <Link to="/servicii" className="back">← Înapoi la servicii</Link>
       <div className="card">
         <span className="provider">{service.providerName}</span>
         <h1>{service.name}</h1>

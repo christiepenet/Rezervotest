@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth';
 
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ fullName: '', email: '', password: '', role: 'CLIENT' });
+  const [params] = useSearchParams();
+  const initialRole = params.get('rol') === 'furnizor' ? 'PROVIDER' : 'CLIENT';
+  const [form, setForm] = useState({ fullName: '', email: '', password: '', role: initialRole });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -17,7 +19,7 @@ export default function Register() {
     setBusy(true);
     try {
       await register(form);
-      navigate(form.role === 'PROVIDER' ? '/serviciile-mele' : '/');
+      navigate(form.role === 'PROVIDER' ? '/serviciile-mele' : '/servicii');
     } catch (err) {
       setError(err.message);
     } finally {

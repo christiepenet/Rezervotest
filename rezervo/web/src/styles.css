@@ -1,9 +1,9 @@
 :root {
-  --bg: #f6f4ef;
+  --bg: #eef2ef;
   --surface: #ffffff;
   --text: #1d2321;
   --muted: #66706c;
-  --border: #e3dfd6;
+  --border: #dde6e1;
   --accent: #1f6f5c;
   --accent-soft: #e3f0ec;
   --danger: #b4412f;
@@ -16,6 +16,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); line-height: 1.5; }
 a { color: var(--accent); }
+h1, h2, h3 { font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; }
 h1 { font-size: 1.8rem; margin: 0 0 .5rem; letter-spacing: -0.02em; }
 h2 { font-size: 1.15rem; margin: 0 0 1rem; }
 h3 { margin: .2rem 0 .4rem; font-size: 1.1rem; }
@@ -23,9 +24,10 @@ h3 { margin: .2rem 0 .4rem; font-size: 1.1rem; }
 .container { max-width: 960px; margin: 0 auto; padding: 0 16px; }
 main.container { padding-top: 28px; padding-bottom: 60px; }
 
+.topbar .container { max-width: 1120px; }
 .topbar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
 .topbar-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
-.brand { font-weight: 800; font-size: 1.25rem; color: var(--accent); text-decoration: none; letter-spacing: -0.03em; }
+.brand { font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--accent); text-decoration: none; letter-spacing: -0.03em; }
 nav { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: .95rem; }
 nav a { color: var(--text); text-decoration: none; }
 nav a.active { color: var(--accent); font-weight: 600; }

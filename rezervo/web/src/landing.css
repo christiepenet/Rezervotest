@@ -1,0 +1,155 @@
+/* ===== Landing page ===== */
+.landing {
+  --pine: #0e3a30;
+  --forest: #1f6f5c;
+  --mint: #cfe3da;
+  --gold: #f4b63f;
+  --gold-ink: #3d2a00;
+  --ink: #14201c;
+  --display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  color: var(--ink);
+}
+
+.l-wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+.landing h1, .landing h2, .landing h3 {
+  font-family: var(--display);
+  letter-spacing: -0.025em;
+  font-variation-settings: 'opsz' 96;
+}
+
+/* ---------- Hero ---------- */
+.l-hero { background: var(--pine); color: #eef5f1; padding: 72px 0 88px; overflow: hidden; }
+.l-hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+.l-hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 0.98;
+  font-weight: 800;
+  font-stretch: 80%;
+  font-variation-settings: 'opsz' 96, 'wdth' 80;
+  margin: 0 0 24px;
+  max-width: 13ch;
+}
+.l-lead { font-size: 1.15rem; line-height: 1.6; max-width: 52ch; color: #bcd3c9; margin: 0 0 32px; }
+.l-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.l-btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .15s ease, background-color .15s ease;
+}
+.l-btn:active { transform: scale(.97); }
+.l-btn-main { background: var(--gold); color: var(--gold-ink); }
+.l-btn-main:hover { background: #ffc85a; }
+.l-btn-ghost { color: #eef5f1; box-shadow: inset 0 0 0 1.5px rgba(238, 245, 241, .45); }
+.l-btn-ghost:hover { box-shadow: inset 0 0 0 1.5px #eef5f1; }
+.l-btn-gold { background: var(--gold); color: var(--gold-ink); }
+
+.landing a:focus-visible, .landing button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- Agenda demo (elementul memorabil) ---------- */
+.agenda {
+  background: #fbfdfc;
+  color: var(--ink);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .45);
+  transform: rotate(1.5deg);
+}
+.agenda-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 18px; }
+.agenda-provider { font-family: var(--display); font-weight: 800; font-size: 1.35rem; margin: 0; letter-spacing: -0.02em; }
+.agenda-service { margin: 2px 0 0; color: #5d6b66; font-size: .95rem; }
+.agenda-tag { font-size: .78rem; background: var(--mint); color: var(--pine); padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+
+.agenda-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+.agenda-days button {
+  display: grid; gap: 0; padding: 8px 0;
+  border: 1.5px solid #dde6e1; background: #fff; border-radius: 12px;
+  cursor: pointer; font: inherit; color: var(--ink);
+}
+.agenda-days span { font-size: .8rem; color: #5d6b66; }
+.agenda-days strong { font-family: var(--display); font-size: 1.25rem; }
+.agenda-days button.on { background: var(--pine); border-color: var(--pine); color: #fff; }
+.agenda-days button.on span { color: var(--mint); }
+
+.agenda-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.agenda-slot {
+  padding: 10px 0; border-radius: 10px; border: 1.5px solid #dde6e1; background: #fff;
+  font: inherit; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink);
+  cursor: pointer; transition: border-color .12s, background-color .12s;
+  animation: slot-in .45s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(var(--i) * 35ms);
+}
+.agenda-slot:hover:not(:disabled) { border-color: var(--forest); }
+.agenda-slot.taken { background: repeating-linear-gradient(-45deg, #f1f4f2 0 6px, #e7ece9 6px 12px); color: #9aa7a1; text-decoration: line-through; cursor: not-allowed; border-color: transparent; }
+.agenda-slot.picked { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+
+@keyframes slot-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.agenda-ticket {
+  margin-top: 16px; padding: 14px 16px; border-radius: 12px;
+  border: 1.5px dashed #c9d5cf; color: #5d6b66; font-size: .95rem;
+  display: grid; gap: 2px; min-height: 64px; align-content: center;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.agenda-ticket.show { background: var(--pine); border: 1.5px solid var(--pine); color: var(--mint); }
+.agenda-ticket.show strong { color: #fff; font-family: var(--display); font-size: 1.2rem; }
+
+/* ---------- Pentru cine ---------- */
+.l-split { display: grid; grid-template-columns: 1fr 1fr; }
+.l-split-col { padding: 64px max(16px, calc((100vw - 1120px) / 2 + 16px)); }
+.l-split-client { background: #fff; padding-right: 48px; }
+.l-split-biz { background: var(--mint); padding-left: 48px; }
+.l-split h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.1; font-weight: 750; margin: 0 0 20px; max-width: 18ch; }
+.l-split ul { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 12px; max-width: 42ch; }
+.l-split li { padding-left: 26px; position: relative; font-size: 1.05rem; }
+.l-split li::before { content: ''; position: absolute; left: 0; top: .5em; width: 12px; height: 12px; border-radius: 3px; background: var(--forest); }
+.l-split-biz li::before { background: var(--pine); }
+.l-link { color: var(--pine); font-weight: 700; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+
+/* ---------- Pasi ---------- */
+.l-steps { padding-top: 80px; padding-bottom: 80px; }
+.l-steps h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1; margin: 0 0 40px; }
+.l-steps ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.l-steps li { border-top: 3px solid var(--ink); padding-top: 16px; }
+.l-step-n { font-family: var(--display); font-weight: 800; font-size: 3.2rem; line-height: 1; color: var(--forest); }
+.l-steps h3 { font-size: 1.35rem; margin: 10px 0 6px; font-weight: 750; }
+.l-steps p { margin: 0; color: #4f5d58; max-width: 32ch; }
+
+/* ---------- Domenii ---------- */
+.l-domains { background: #fff; padding: 64px 0; border-top: 1px solid #dde6e1; }
+.l-domains-intro { margin: 0 0 18px; color: #4f5d58; font-size: 1.05rem; }
+.l-domains-list { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.5rem, 3.4vw, 2.5rem); line-height: 1.25; letter-spacing: -0.02em; }
+.l-domains-list span:not(:last-child)::after { content: ' / '; color: var(--gold); font-weight: 400; }
+
+/* ---------- Final ---------- */
+.l-final { background: var(--forest); color: #fff; padding: 72px 0; }
+.l-final-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.l-final h2 { margin: 0; font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.08; font-weight: 800; max-width: 22ch; }
+
+.l-footer { background: var(--pine); color: #8fb3a5; padding: 24px 0; font-size: .9rem; }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 860px) {
+  .l-hero { padding: 48px 0 64px; }
+  .l-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .agenda { transform: none; }
+  .l-split { grid-template-columns: 1fr; }
+  .l-split-col, .l-split-client, .l-split-biz { padding: 48px 16px; }
+  .l-steps ol { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 400px) {
+  .agenda { padding: 16px; }
+  .agenda-slots { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agenda-slot { animation: none; }
+  .l-btn, .agenda-ticket, .agenda-slot { transition: none; }
+}

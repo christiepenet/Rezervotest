@@ -16,7 +16,7 @@ export default function Login() {
     setBusy(true);
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/servicii');
     } catch (err) {
       setError(err.message);
     } finally {

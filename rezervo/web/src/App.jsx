@@ -1,5 +1,6 @@
-import { Link, NavLink, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './auth';
+import Landing from './pages/Landing';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import Login from './pages/Login';
@@ -18,6 +19,7 @@ function RequireAuth({ children, role }) {
 export default function App() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const isLanding = useLocation().pathname === '/';
 
   return (
     <>
@@ -25,7 +27,7 @@ export default function App() {
         <div className="container topbar-inner">
           <Link to="/" className="brand">Rezervo</Link>
           <nav>
-            <NavLink to="/" end>Servicii</NavLink>
+            <NavLink to="/servicii">Servicii</NavLink>
             {user && <NavLink to="/programari">Programări</NavLink>}
             {user?.role === 'PROVIDER' && <NavLink to="/serviciile-mele">Serviciile mele</NavLink>}
             {user ? (
@@ -42,9 +44,10 @@ export default function App() {
         </div>
       </header>
 
-      <main className="container">
+      <main className={isLanding ? undefined : 'container'}>
         <Routes>
-          <Route path="/" element={<Services />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/servicii" element={<Services />} />
           <Route path="/servicii/:id" element={<ServiceDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cont-nou" element={<Register />} />
